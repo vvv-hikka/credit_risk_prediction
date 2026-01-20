@@ -12,27 +12,7 @@ This repository contains two complementary projects for credit risk assessment u
 ### Overview
 Predicts loan default risk using standard machine learning classification models. This approach focuses on maximizing predictive performance using modern ML algorithms.
 
-### Methods Used
-
-#### Data Preprocessing
-1. **Missing Value Handling**
-   - `loan_int_rate`: Filled with median grouped by `loan_grade`
-   - `person_emp_length`: Filled with median grouped by age groups
-
-2. **Categorical Variable Encoding**
-   - `person_home_ownership` (RENT, OWN, MORTGAGE, OTHER): One-hot encoding
-   - `loan_intent` (6 categories): One-hot encoding
-   - `loan_grade` (A-G): Ordinal encoding (A=1, B=2, ..., G=7)
-   - `cb_person_default_on_file` (Y/N): Binary encoding
-
-3. **Feature Selection**
-   - Mutual Information-based feature selection
-   - Selects top features with MI > 0.01 or top 20 features
-
-4. **Data Scaling**
-   - StandardScaler normalization for numerical features
-
-#### Machine Learning Models
+### Models Used
 - **Logistic Regression**: With class weight balancing for imbalanced data
 - **Random Forest**: 300 estimators, handles class imbalance
 - **XGBoost**: Gradient boosting with automatic class weight adjustment
@@ -61,21 +41,10 @@ Implements a traditional credit scoring model using Weight of Evidence (WoE) tra
 #### Model Building
 - **Logistic Regression on WoE Variables**: Interpretable coefficients
 - **Scorecard Construction**: Industry-standard credit scoring formulas
-  - Score formula: `Score_i = (βi × WoE_i + α/n) × Factor + Offset/n`
-  - Parameters: PDO=20, Target Score=600, Target Odds=50:1
 
 #### Population Stability Index (PSI) Analysis
-- Compares distribution stability between training and test sets
-- Identifies data drift (PSI thresholds: <0.1 stable, 0.1-0.25 moderate, ≥0.25 significant)
 
 #### Class Imbalance Handling
-Tests multiple methods and selects best:
-- Random Over-Sampling
-- SMOTE (Synthetic Minority Over-sampling)
-- ADASYN
-- Random Under-Sampling
-- SMOTE + Tomek Links
-- Class Weight Balancing
 
 ---
 
